@@ -19,7 +19,14 @@ namespace ConsoleApplication1
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();
-            }
+                while (rdr.read()) {
+                    Console.WriteLine(rdr[0].ToString() + "\t" + rdr[1].ToString());
+                }
+                rdr.Close();
+            }catch(Exception e) { Console.WriteLine(e); }
+            conn.Close();
+            Console.WriteLine("connection closed.press any key");
+            Console.Read();
         }
     }
 }
